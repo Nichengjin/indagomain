@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indago - Welcome Back</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Open+Sans:wght@400;700&family=Lato:wght@400;700&family=Merriweather:wght@400;700&family=Playfair+Display:wght@400;700&family=Crimson+Text:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --card-bg: rgba(255, 255, 255, 0.7);
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --accent-color: #4a90e2;
+            --search-bg: #f0f0f0;
+            --font-primary: 'Poppins', sans-serif;
+            --font-secondary: 'Open Sans', sans-serif;
+            --font-title: 'Lato', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-primary);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-family: var(--font-title);
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        .welcome-section {
+            height: calc(100vh - 80px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: var(--font-title);
+            font-size: 48px;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            background-color: var(--search-bg);
+            transition: box-shadow 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .search-bar:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px var(--accent-color);
+        }
+
+        .search-button {
+            padding: 15px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 0 30px 30px 0;
+            background-color: var(--accent-color);
+            color: white;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .search-button:hover {
+            background-color: #3a7bc8;
+            transform: scale(1.05);
+        }
+
+        .recent-work {
+            background-color: var(--card-bg);
+            backdrop-filter: blur(5px);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            max-width: 400px;
+            margin: 30px auto;
+        }
+
+        .recent-work h2 {
+            font-family: var(--font-secondary);
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .recent-work-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .recent-work-item {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .recent-work-item:last-child {
+            border-bottom: none;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h2 {
+            font-family: var(--font-secondary);
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .card p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .list-item:last-child {
+            border-bottom: none;
+        }
+
+        .profile-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-color);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .content-grid .card:nth-child(3n+1) {
+            grid-column: 1 / span 2;
+        }
+
+        .content-grid .card:nth-child(3n+2) {
+            grid-column: 3;
+        }
+
+        .content-grid .card:nth-child(3n) {
+            grid-column: 1 / -1;
+        }
+        .card.wide {
+            grid-column: span 2;
+        }
+        .list-item {
+  padding: 10px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.list-item:hover {
+  background-color: rgba(0,0,0,0.05);
+  transform: translateX(5px);
+}
+
+.list-item::before {
+  content: '→';
+  opacity: 0;
+  margin-right: 5px;
+  transition: all 0.3s ease;
+}
+
+.list-item:hover::before {
+  opacity: 1;
+  margin-right: 10px;
+}
+.footer {
+  color: #4b5563;
+  padding: 3rem 0;
+  font-family: Arial, sans-serif;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  padding: 0 1rem;
+}
+
+.footer-section h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.footer-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-section a {
+  color: #4b5563;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+  color: #4f46e5;
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-icons a {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.social-icons a:hover {
+  opacity: 1;
+}
+
+.icon-twitter { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>'); }
+.icon-linkedin { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>'); }
+.icon-github { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>'); }
+.icon-mail { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>'); }
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 2rem;
+  margin-top: 2rem;
+  border-top: 1px solid #d1d5db;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">Indago</div>
+            <nav>
+                <a href="#">Explore</a>
+                <a href="#">My Library</a>
+                <a href="#">Community</a>
+                <a href="#">Profile</a>
+            </nav>
+            <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+        </header>
+        
+        <main>
+            <section class="welcome-section">
+                <h1>Welcome back, Thoughtseeker</h1>
+                <p>Resume your last work or create new inspirations</p>
+                <div class="search-container">
+                    <input type="text" class="search-bar" placeholder="Type to find...">
+                    <button class="search-button">Search</button>
+                </div>
+                <div class="recent-work">
+                    <h2>Recent Work and Inspirations</h2>
+                    <ul class="recent-work-list">
+                        <li class="recent-work-item">Paper Idea: European Tourism Industry Research</li>
+                        <li class="recent-work-item">Physics Problem: Pulley Systems Calculation</li>
+                        <li class="recent-work-item">Literary Creation: Theme Intersection in Art</li>
+                        <li class="recent-work-item">Code Writing: New Processing Method for Multi-threading</li>
+                        <li class="recent-work-item">Early Childhood Education: Addition and Subtraction Within 20</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <div class="content-grid">
+                <div class="card fade-in">
+                    <h2>Knowledge Exploration</h2>
+                    <p>Discover new knowledge through powerful reading tools equipped with AI.</p>
+                    <div class="list-item">
+                        <span>Quantum Mechanics Basics</span>
+                        <span>🔍 Physics</span>
+                    </div>
+                    <div class="list-item">
+                        <span>Advanced Machine Learning</span>
+                        <span>🔍 Computer Science</span>
+                    </div>
+                    <div class="list-item">
+                        <span>Modern Poetry Analysis</span>
+                        <span>🔍 Literature</span>
+                    </div>
+                </div>
+                <div class="card fade-in">
+                    <h2>Top Rated</h2>
+                    <p>Here's most liked books and essays:</p>
+                    <div class="list-item">
+                        <span>Quantum Mechanics Basics</span>
+                        <span>★ 4.9</span>
+                    </div>
+                    <div class="list-item">
+                        <span>Advanced Machine Learning</span>
+                        <span>★ 4.8</span>
+                    </div>
+                    <div class="list-item">
+                        <span>Modern Poetry Analysis</span>
+                        <span>★ 4.7</span>
+                    </div>
+                </div>
+                <div class="card fade-in">
+                    <h2>Recent Publications</h2>
+                    <p>Get know to the newest researches done by our users.</p>
+                    <div class="list-item">
+                        <span>Research Paper: AI in Healthcare</span>
+                        <span>2 hours ago</span>
+                    </div>
+                    <div class="list-item">
+                        <span>Journal Article: Climate Change Impact</span>
+                        <span>5 hours ago</span>
+                    </div>
+                    <div class="list-item">
+                        <span>Book Chapter: Quantum Computing Fundamentals</span>
+                        <span>1 day ago</span>
+                    </div>
+                </div>
+                <div class="card fade-in">
+                    <h2>Community Trends</h2>
+                    <p>Check out the latest hot topics and discussions.</p>
+                    <div class="list-item">
+                        <span>AI Ethics and Bias</span>
+                        <span>🔥🔥🔥 Very Hot</span>
+                    </div>
+                    <div class="list-item">
+                        <span>Quantum Computing Applications</span>
+                        <span>🔥🔥 Hot</span>
+                    </div>
+                    <div class="list-item">
+                        <span>Climate Change Solutions</span>
+                        <span>🔥 Trending</span>
+                    </div>
+                    <div class="list-item">
+                        <span>Space Exploration and Colonization</span>
+                        <span>🔥 Trending</span>
+                    </div>
+                    <div class="list-item">
+                        <span>Artificial Intelligence in Healthcare</span>
+                        <span>🔥 New</span>
+                    </div>
+                </div>
+                <div class="card fade-in">
+                    <h2>Research Opportunities</h2>
+                    <p>Find new research opportunities and collaborations.</p>
+                    <div class="list-item">
+                        <span>Research Assistant: AI in Healthcare</span>
+                        <span>🔍 Full-time</span>
+                        <span>📍 New York, NY</span>
+                    </div>
+                    <div class="list-item">
+                        <span>Research Fellow: Quantum Computing</span>
+                        <span>🔍 Part-time</span>
+                        <span>📍 London, UK</span>
+                    </div>
+                    <div class="list-item">
+                        <span>Researcher: Climate Change Impact</span>
+                        <span>🔍 Full-time</span>
+                        <span>📍 Sydney, AU</span>
+                    </div>
+                    <div class="list-item">
+                        <span>Research Analyst: Space Exploration</span>
+                        <span>🔍 Full-time</span>
+                        <span>📍 Houston, TX</span>
+                    </div>
+                </div>
+                <div class="card fade-in">
+                    <h2>Recent Updates</h2>
+                    <p>Discover what's happening around.</p>
+                    <div class="list-item">
+                        <span>Cognitive Science Fundamentals</span>
+                        <span>2 hours ago</span>
+                    </div>
+                    <div class="list-item">
+                        <span>Sustainable Energy Solutions</span>
+                        <span>5 hours ago</span>
+                    </div>
+                    <div class="list-item">
+                        <span>Artificial Intelligence Ethics</span>
+                        <span>1 day ago</span>
+                    </div>
+                </div>
+                <div class="card fade-in">
+                    <h2>Community Contributors</h2>
+                    <p>Meet our elite contributors.</p>
+                    <div class="list-item">
+                        <span>Dr. Emma Scientist</span>
+                        <span>🏅 Gold</span>
+                        <span>📚 42 Articles</span>
+                        <span>👥 1.2k Followers</span>
+                        <span>🔖 89 Sparkles</span>
+                    </div>
+                    <div class="list-item">
+                        <span>Prof. Alex Philosopher</span>
+                        <span>🥈 Silver</span>
+                        <span>📚 32 Articles</span>
+                        <span>👥 1k Followers</span>
+                        <span>🔖 75 Sparkles</span>
+                    </div>
+                    <div class="list-item">
+                        <span>Researcher Sam</span>
+                        <span>🥉 Bronze</span>
+                        <span>📚 22 Articles</span>
+                        <span>👥 800 Followers</span>
+                        <span>🔖 60 Sparkles</span>
+                    </div>
+                </div>
+                <div class="card fade-in">
+                    <h2>Personal Profile</h2>
+                    <p>Track your personal data.</p>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <div class="stat-value">42</div>
+                            <div class="stat-label">Articles</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">1.2k</div>
+                            <div class="stat-label">Followers</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">89</div>
+                            <div class="stat-label">Citations</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="footer">
+            <div class="footer-content">
+              <div class="footer-section">
+                <h3>About Indago</h3>
+                <p>Indago is a platform for researchers, students, and knowledge enthusiasts to explore, organize, and share their academic journey.</p>
+              </div>
+              <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                  <li><a href="#">Terms of Service</a></li>
+                  <li><a href="#">Privacy Policy</a></li>
+                  <li><a href="#">Contact Us</a></li>
+                </ul>
+              </div>
+              <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                  <li><a href="#">Forum</a></li>
+                  <li><a href="#">Blog</a></li>
+                  <li><a href="#">Events</a></li>
+                </ul>
+              </div>
+              <div class="footer-section">
+                <h3>Connect with Us</h3>
+                <div class="social-icons">
+                  <a href="#" class="icon-twitter" aria-label="Twitter"></a>
+                  <a href="#" class="icon-linkedin" aria-label="LinkedIn"></a>
+                  <a href="#" class="icon-github" aria-label="GitHub"></a>
+                  <a href="#" class="icon-mail" aria-label="Email"></a>
+                </div>
+              </div>
+            </div>
+            <div class="footer-bottom">
+              <p>&copy; <span id="current-year"></span> Indago. All rights reserved.</p>
+            </div>
+          </footer>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme') || 'light';
+            let newTheme;
+
+            switch(currentTheme) {
+                case 'light':
+                    newTheme = 'dark';
+                    setTheme({
+                        '--bg-color': '#1a1a1a',
+                        '--text-color': '#e0e0e0',
+                        '--card-bg': 'rgba(40, 40, 40, 0.7)',
+                        '--card-shadow': '0 4px 6px rgba(0, 0, 0, 0.3)',
+                        '--accent-color': '#64b5f6',
+                        '--search-bg': '#333333',
+                        '--font-primary': "'Open Sans', sans-serif",
+                        '--font-secondary': "'Lato', sans-serif",
+                        '--font-title': "'Roboto', sans-serif"
+                    });
+                    break;
+                case 'dark':
+                    newTheme = 'sepia';
+                    setTheme({
+                        '--bg-color': '#f1e7d0',
+                        '--text-color': '#5b4636',
+                        '--card-bg': 'rgba(255, 246, 224, 0.7)',
+                        '--card-shadow': '0 4px 6px rgba(91, 70, 54, 0.2)',
+                        '--accent-color': '#8b4513',
+                        '--search-bg': '#e6d9c0',
+                        '--font-primary': "'Merriweather', serif",
+                        '--font-secondary': "'Crimson Text', serif",
+                        '--font-title': "'Playfair Display', serif"
+                    });
+                    break;
+                default:
+                    newTheme = 'light';
+                    setTheme({
+                        '--bg-color': '#ffffff',
+                        '--text-color': '#333333',
+                        '--card-bg': 'rgba(255, 255, 255, 0.7)',
+                        '--card-shadow': '0 4px 6px rgba(0, 0, 0, 0.1)',
+                        '--accent-color': '#4a90e2',
+                        '--search-bg': '#f0f0f0',
+                        '--font-primary': "'Poppins', sans-serif",
+                        '--font-secondary': "'Open Sans', sans-serif",
+                        '--font-title': "'Lato', sans-serif"
+                    });
+            }
+
+            body.setAttribute('data-theme', newTheme);
+        }
+
+        function setTheme(theme) {
+            Object.keys(theme).forEach(key => {
+                document.documentElement.style.setProperty(key, theme[key]);
+            });
+        }
+
+        // Fade in cards on scroll
+        window.addEventListener('scroll', function() {
+            var cards = document.querySelectorAll('.card');
+            cards.forEach(function(card) {
+                var cardPosition = card.getBoundingClientRect().top;
+                var screenPosition = window.innerHeight / 1.3;
+                
+                if(cardPosition < screenPosition) {
+                    card.classList.add('fade-in');
+                }
+            });
+        });
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial theme
+            setTheme({
+                '--bg-color': '#ffffff',
+                '--text-color': '#333333',
+                '--card-bg': 'rgba(255, 255, 255, 0.7)',
+                '--card-shadow': '0 4px 6px rgba(0, 0, 0, 0.1)',
+                '--accent-color': '#4a90e2',
+                '--search-bg': '#f0f0f0',
+                '--font-primary': "'Roboto', sans-serif",
+                '--font-secondary': "'Open Sans', sans-serif",
+                '--font-title': "'Lato', sans-serif"
+            });
+
+            // Add smooth scrolling to all links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Add interaction to recent work items
+            var recentWorkItems = document.querySelectorAll('.recent-work-item');
+            recentWorkItems.forEach(function(item) {
+                item.addEventListener('click', function() {
+                    alert('Opening: ' + this.textContent);
+                    // In a real application, this would open the selected work
+                });
+            });
+        });
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        document.addEventListener('DOMContentLoaded', function() {
+            var cards = document.querySelectorAll('.fade-in');
+  
+            function checkScroll() {
+                cards.forEach(function(card) {
+                var cardTop = card.getBoundingClientRect().top;
+                var triggerBottom = window.innerHeight * 0.8;
+      
+                if (cardTop < triggerBottom) {
+                    card.classList.add('is-visible');
+                }
+        });
+  }
+  
+  window.addEventListener('scroll', checkScroll);
+  checkScroll(); // Check on load
+});
+    </script>
+</body>
+</html>
